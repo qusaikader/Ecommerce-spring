@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class AdminController {
@@ -35,6 +36,12 @@ public class AdminController {
     @PostMapping("/admin/categories/add")
     public String postCatAdd(@ModelAttribute("category") Category category) {
         categoryService.addCategory(category);
+        return "redirect:/admin/categories";
+    }
+
+    @GetMapping("/admin/categories/delete/{id}")
+    public String deleteCat(@PathVariable int id) {
+        categoryService.removeCategoryById(id);
         return "redirect:/admin/categories";
     }
 }
