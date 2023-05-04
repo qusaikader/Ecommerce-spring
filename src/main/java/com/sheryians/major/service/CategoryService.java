@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.sheryians.major.repository.CategoryRepository;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -22,5 +23,9 @@ public class CategoryService {
 
     public void removeCategoryById(int id) {
         categoryRepository.deleteById(id);
+    }
+
+    public Optional<Category> getCategoryById(int id) {
+        return categoryRepository.findById(id);
     }
 }

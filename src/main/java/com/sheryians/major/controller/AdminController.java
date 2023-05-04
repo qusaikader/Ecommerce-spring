@@ -3,6 +3,8 @@ package com.sheryians.major.controller;
 import com.sheryians.major.model.*;
 import com.sheryians.major.service.CategoryService;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,5 +45,16 @@ public class AdminController {
     public String deleteCat(@PathVariable int id) {
         categoryService.removeCategoryById(id);
         return "redirect:/admin/categories";
+    }
+
+    @GetMapping("/admin/categories/update/{id}")
+    public String updateCat(@PathVariable int id, Model model) {
+        Optional<Category> category = categoryService.getCategoryById(id);
+        if (category.isPresent()) {
+            model.addAttribute("category", category.get());
+            return "categoriesAdd";
+        } else {
+            return "404";
+        }
     }
 }
