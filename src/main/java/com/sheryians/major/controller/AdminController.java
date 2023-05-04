@@ -9,4 +9,14 @@ public class AdminController {
     public String adminHome() {
         return "adminHome";
     }
+
+    @GetMapping("/admin/categories")
+    public String getCat() {
+        return "categories";
+    }
+
+    @GetMapping("/admin/categories/add")
+    public String getCatAdd() {
+        return "categoriesAdd";
+    }
 }
