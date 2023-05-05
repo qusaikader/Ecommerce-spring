@@ -112,7 +112,18 @@ public class AdminController {
     }
     @GetMapping("/admin/product/update/{id}")
     public String updateProductGet(@PathVariable long id,Model model){
+        Product product=productService.getProductById(id).get();
+        ProductDTO productDTO =new ProductDTO();
+        productDTO.setId(product.getId());
+        productDTO.setName(product.getName());
+        productDTO.setCategoryId(product.getCategory().getId());
+        product.setPrice(product.getPrice());
+        productDTO.setWeight(product.getWeight());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setImageName(product.getImageName());
 
+        model.addAttribute("categories", categoryService.getAllCategory());
+        model.addAttribute("productDTO", productDTO);
         return "productsAdd";
     }
 
